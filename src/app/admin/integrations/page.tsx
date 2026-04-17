@@ -1,6 +1,8 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { requireAdminPage } from "@/lib/admin";
 import { getCafe24IntegrationSummary, getCafe24MallId, getCafe24OauthScopes } from "@/lib/cafe24";
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminIntegrationsPage(
   props: { searchParams?: Promise<{ cafe24?: string; message?: string; mall?: string }> },
@@ -16,18 +18,18 @@ export default async function AdminIntegrationsPage(
 
   const statusMessage =
     searchParams?.cafe24 === "success"
-      ? "Cafe24 OAuth 연결이 완료되었습니다."
+      ? "Cafe24 OAuth ?곌껐???꾨즺?섏뿀?듬땲??"
       : searchParams?.cafe24 === "error"
-        ? searchParams.message ?? "Cafe24 OAuth 연결 중 오류가 발생했습니다."
+        ? searchParams.message ?? "Cafe24 OAuth ?곌껐 以??ㅻ쪟媛 諛쒖깮?덉뒿?덈떎."
         : null;
 
   return (
     <section className="grid">
       <div className="card grid">
         <div>
-          <h1>Cafe24 연동</h1>
+          <h1>Cafe24 ?곕룞</h1>
           <p className="muted">
-            몰 ID <strong>{mallId}</strong> 의 주문/상품 API 연결 상태를 관리합니다.
+            紐?ID <strong>{mallId}</strong> ??二쇰Ц/?곹뭹 API ?곌껐 ?곹깭瑜?愿由ы빀?덈떎.
           </p>
         </div>
 
@@ -39,13 +41,13 @@ export default async function AdminIntegrationsPage(
 
         <div className="grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
           <div className="card">
-            <strong>연결 상태</strong>
+            <strong>?곌껐 ?곹깭</strong>
             <p className="muted" style={{ marginBottom: 0 }}>
-              {integration ? "연결됨" : "미연결"}
+              {integration ? "?곌껐?? : "誘몄뿰寃?}
             </p>
           </div>
           <div className="card">
-            <strong>요청 Scope</strong>
+            <strong>?붿껌 Scope</strong>
             <p className="muted" style={{ marginBottom: 0 }}>
               {requestedScopes.join(", ")}
             </p>
@@ -54,13 +56,13 @@ export default async function AdminIntegrationsPage(
 
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
           <Link href="/api/cafe24/oauth/start?next=/admin/integrations">
-            Cafe24 OAuth 연결 시작
+            Cafe24 OAuth ?곌껐 ?쒖옉
           </Link>
         </div>
       </div>
 
       <div className="card grid">
-        <h2>현재 저장된 토큰 상태</h2>
+        <h2>?꾩옱 ??λ맂 ?좏겙 ?곹깭</h2>
         {integration ? (
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <tbody>
@@ -85,30 +87,30 @@ export default async function AdminIntegrationsPage(
                 <td>{integration.issued_at ? new Date(integration.issued_at).toLocaleString("ko-KR") : "-"}</td>
               </tr>
               <tr>
-                <th align="left">Access Token 만료</th>
+                <th align="left">Access Token 留뚮즺</th>
                 <td>{integration.expires_at ? new Date(integration.expires_at).toLocaleString("ko-KR") : "-"}</td>
               </tr>
               <tr>
-                <th align="left">Refresh Token 만료</th>
+                <th align="left">Refresh Token 留뚮즺</th>
                 <td>{integration.refresh_token_expires_at ? new Date(integration.refresh_token_expires_at).toLocaleString("ko-KR") : "-"}</td>
               </tr>
               <tr>
-                <th align="left">마지막 동기화</th>
+                <th align="left">留덉?留??숆린??/th>
                 <td>{integration.last_synced_at ? new Date(integration.last_synced_at).toLocaleString("ko-KR") : "-"}</td>
               </tr>
               <tr>
-                <th align="left">최근 오류</th>
+                <th align="left">理쒓렐 ?ㅻ쪟</th>
                 <td>{integration.last_error ?? "-"}</td>
               </tr>
               <tr>
-                <th align="left">갱신 시각</th>
+                <th align="left">媛깆떊 ?쒓컖</th>
                 <td>{new Date(integration.updated_at).toLocaleString("ko-KR")}</td>
               </tr>
             </tbody>
           </table>
         ) : (
           <p className="muted">
-            아직 Cafe24 토큰이 저장되지 않았습니다. 먼저 OAuth 연결을 진행해 주세요.
+            ?꾩쭅 Cafe24 ?좏겙????λ릺吏 ?딆븯?듬땲?? 癒쇱? OAuth ?곌껐??吏꾪뻾??二쇱꽭??
           </p>
         )}
       </div>

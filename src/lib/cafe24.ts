@@ -67,7 +67,7 @@ function getCafe24Env(name: string) {
 }
 
 export function getCafe24MallId() {
-  return getCafe24Env("CAFE24_MALL_ID");
+  return process.env.CAFE24_MALL_ID ?? "nodescale";
 }
 
 export function getCafe24OauthScopes() {

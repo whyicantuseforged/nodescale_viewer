@@ -1,5 +1,7 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { getAdminDashboardData } from "@/lib/admin-data";
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
   const { metrics, recentUploads, recentPayments } = await getAdminDashboardData();
@@ -8,9 +10,9 @@ export default async function AdminDashboardPage() {
     <div className="grid">
       <section className="card grid">
         <div>
-          <h1>관리자 대시보드</h1>
+          <h1>愿由ъ옄 ??쒕낫??/h1>
           <p className="muted">
-            상품 상태, CSV 업로드 결과, 최근 결제 흐름을 한 화면에서 확인합니다.
+            ?곹뭹 ?곹깭, CSV ?낅줈??寃곌낵, 理쒓렐 寃곗젣 ?먮쫫?????붾㈃?먯꽌 ?뺤씤?⑸땲??
           </p>
         </div>
         <div
@@ -38,19 +40,19 @@ export default async function AdminDashboardPage() {
       >
         <div className="card grid">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <h2>최근 업로드</h2>
-            <Link href="/admin/products">상품 관리</Link>
+            <h2>理쒓렐 ?낅줈??/h2>
+            <Link href="/admin/products">?곹뭹 愿由?/Link>
           </div>
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
                 <tr>
-                  <th align="left">파일명</th>
-                  <th align="left">상태</th>
-                  <th align="left">전체 행</th>
-                  <th align="left">성공</th>
-                  <th align="left">실패</th>
-                  <th align="left">업로드 시각</th>
+                  <th align="left">?뚯씪紐?/th>
+                  <th align="left">?곹깭</th>
+                  <th align="left">?꾩껜 ??/th>
+                  <th align="left">?깃났</th>
+                  <th align="left">?ㅽ뙣</th>
+                  <th align="left">?낅줈???쒓컖</th>
                 </tr>
               </thead>
               <tbody>
@@ -71,24 +73,24 @@ export default async function AdminDashboardPage() {
 
         <div className="card grid">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <h2>최근 결제</h2>
-            <Link href="/admin/access">구매/권한 보기</Link>
+            <h2>理쒓렐 寃곗젣</h2>
+            <Link href="/admin/access">援щℓ/沅뚰븳 蹂닿린</Link>
           </div>
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
                 <tr>
-                  <th align="left">주문번호</th>
-                  <th align="left">금액</th>
-                  <th align="left">상태</th>
-                  <th align="left">시각</th>
+                  <th align="left">二쇰Ц踰덊샇</th>
+                  <th align="left">湲덉븸</th>
+                  <th align="left">?곹깭</th>
+                  <th align="left">?쒓컖</th>
                 </tr>
               </thead>
               <tbody>
                 {(recentPayments ?? []).map((payment) => (
                   <tr key={payment.id}>
                     <td>{payment.order_id}</td>
-                    <td>{payment.amount.toLocaleString()}원</td>
+                    <td>{payment.amount.toLocaleString()}??/td>
                     <td>{payment.status}</td>
                     <td>
                       {payment.paid_at
