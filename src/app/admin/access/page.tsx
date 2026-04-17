@@ -1,7 +1,5 @@
 import { getAdminAccessData } from "@/lib/admin-data";
 
-export const dynamic = "force-dynamic";
-
 interface AccessPageProps {
   searchParams: Promise<{
     q?: string;
@@ -17,9 +15,9 @@ export default async function AdminAccessPage({ searchParams }: AccessPageProps)
     <div className="grid">
       <section className="card grid">
         <div>
-          <h1>援щℓ 諛??댁슜沅?議고쉶</h1>
+          <h1>구매 및 이용권 조회</h1>
           <p className="muted">
-            ?ъ슜?? 二쇰Ц踰덊샇, ?곹뭹 湲곗??쇰줈 寃곗젣 ?대젰怨?湲곌컙沅??곹깭瑜??④퍡 ?뺤씤?⑸땲??
+            사용자, 주문번호, 상품 기준으로 결제 이력과 기간권 상태를 함께 확인합니다.
           </p>
         </div>
 
@@ -27,25 +25,25 @@ export default async function AdminAccessPage({ searchParams }: AccessPageProps)
           <input
             name="q"
             defaultValue={q ?? ""}
-            placeholder="?대찓?? ?대쫫, 二쇰Ц踰덊샇, ?곹뭹肄붾뱶濡?寃??
+            placeholder="이메일, 이름, 주문번호, 상품코드로 검색"
             style={{ maxWidth: 360 }}
           />
-          <button type="submit">寃??/button>
+          <button type="submit">검색</button>
         </form>
       </section>
 
       <section className="card grid">
-        <h2>理쒓렐 寃곗젣</h2>
+        <h2>최근 결제</h2>
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th align="left">?ъ슜??/th>
-                <th align="left">?곹뭹</th>
-                <th align="left">二쇰Ц踰덊샇</th>
-                <th align="left">湲덉븸</th>
-                <th align="left">?곹깭</th>
-                <th align="left">寃곗젣 ?쒓컖</th>
+                <th align="left">사용자</th>
+                <th align="left">상품</th>
+                <th align="left">주문번호</th>
+                <th align="left">금액</th>
+                <th align="left">상태</th>
+                <th align="left">결제 시각</th>
               </tr>
             </thead>
             <tbody>
@@ -58,7 +56,7 @@ export default async function AdminAccessPage({ searchParams }: AccessPageProps)
                     <td>{profile?.email ?? profile?.name ?? payment.user_id}</td>
                     <td>{product?.title ?? product?.code ?? payment.product_id}</td>
                     <td>{payment.order_id}</td>
-                    <td>{payment.amount.toLocaleString()}??/td>
+                    <td>{payment.amount.toLocaleString()}원</td>
                     <td>{payment.status}</td>
                     <td>
                       {(payment.paid_at ?? payment.created_at) &&
@@ -73,17 +71,17 @@ export default async function AdminAccessPage({ searchParams }: AccessPageProps)
       </section>
 
       <section className="card grid">
-        <h2>?곹뭹蹂??댁슜沅?/h2>
+        <h2>상품별 이용권</h2>
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th align="left">?ъ슜??/th>
-                <th align="left">?곹뭹</th>
-                <th align="left">?쒖옉??/th>
-                <th align="left">留뚮즺??/th>
-                <th align="left">?곹깭</th>
-                <th align="left">?⑥? 湲곌컙</th>
+                <th align="left">사용자</th>
+                <th align="left">상품</th>
+                <th align="left">시작일</th>
+                <th align="left">만료일</th>
+                <th align="left">상태</th>
+                <th align="left">남은 기간</th>
               </tr>
             </thead>
             <tbody>
@@ -103,7 +101,7 @@ export default async function AdminAccessPage({ searchParams }: AccessPageProps)
                     <td>{new Date(pass.access_start_at).toLocaleString("ko-KR")}</td>
                     <td>{new Date(pass.access_end_at).toLocaleString("ko-KR")}</td>
                     <td>{pass.status}</td>
-                    <td>{daysRemaining}??/td>
+                    <td>{daysRemaining}일</td>
                   </tr>
                 );
               })}
