@@ -1,9 +1,9 @@
-﻿{
+{
   "name": "lead-admin-web",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start"
   },
   "dependencies": {
