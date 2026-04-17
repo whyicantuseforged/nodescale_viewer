@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import LoginPageClient from "@/app/login/login-page-client";
 
+export const dynamic = "force-dynamic";
+
 function LoginFallback() {
   return (
     <main style={{ maxWidth: 420, margin: "80px auto" }}>
